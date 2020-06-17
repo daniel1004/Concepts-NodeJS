@@ -44,7 +44,7 @@ app.get("/repositories", (request, response) => {
 app.post("/repositories", (request, response) => {
   const { title, url, techs } = request.body;
 
-  const repository = { id: uuid(), title, url, techs, like:0 }
+  const repository = { id: uuid(), title, url, techs, likes:0 }
   
   repositories.push(repository);
 
@@ -67,7 +67,7 @@ app.put("/repositories/:id", validadeProjectId, (request, response) => {
     title,
     url,
     techs,
-    like: repository.like,
+    likes: repository.likes,
   }
 
   repositories[repositoryIndex] = repositoryUpdate
@@ -98,7 +98,7 @@ app.post("/repositories/:id/like", validadeProjectId, (request, response) => {
     return response.status(400).json({ error: 'Repository not found' });
   }
 
-  repository.like += 1;
+  repository.likes += 1;
 
   repositories[repository.id] = repository;
 
